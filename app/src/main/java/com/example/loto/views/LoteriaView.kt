@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,6 +31,9 @@ fun Loteriaview(viewModels:LoteriaViewModel){
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        if (viewModels.isLoading) {
+            CircularProgressIndicator()
+        }
         if(lottonNumbers.isEmpty()){
             Text(text = "Loteria", fontSize = 40.sp,
                 fontWeight = FontWeight.Bold
@@ -48,6 +52,7 @@ fun Loteriaview(viewModels:LoteriaViewModel){
 
 @Composable
 fun LotteryNumbers(lottonNumbers: List<Int>) {
+
     LazyRow(
         contentPadding = PaddingValues(
             horizontal = 16.dp,
@@ -55,20 +60,22 @@ fun LotteryNumbers(lottonNumbers: List<Int>) {
         )
     ) {
         items(lottonNumbers){ number ->
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .padding(horizontal = 8.dp)
-                    .size(35.dp)
-                    .background(Color.Red, CircleShape)
-            ){
-                Text(
-                    text = number.toString(),
-                    color = Color.White,
-                    fontSize = 24.sp
-                )
-            }
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp)
+                        .size(35.dp)
+                        .background(Color.Red, CircleShape)
+                ) {
+                    Text(
+                        text = number.toString(),
+                        color = Color.White,
+                        fontSize = 24.sp
+                    )
+                }
+
         }
+
 
     }
 }
